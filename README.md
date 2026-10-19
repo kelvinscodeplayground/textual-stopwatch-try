@@ -6,6 +6,8 @@ reactive state, and timers together.
 
 Run with `uv run tui` from the project root.
 
+This project is build with [Textual](https://textual.textualize.io/) by following the [Textual tutorial](https://textual.textualize.io/tutorial/).
+
 ## Project layout
 
 ```
@@ -107,13 +109,13 @@ Using `monotonic()` for elapsed time means the display stays correct even if the
 
 Nothing in the project calls `on_button_pressed`, `watch_time`, `update_time`, or `action_toggle_dark` directly. Textual calls them through name-based dispatch:
 
-| You write | Textual calls it when |
-|---|---|
-| `on_button_pressed(self, event)` | a `Button.Pressed` message reaches this widget |
-| `on_mount(self)` | the widget is mounted |
-| `watch_time(self, value)` | `self.time` is assigned a different value |
-| `action_toggle_dark(self)` | a bound key (`D`) runs the action |
-| `update_time` (passed to `set_interval`) | the timer fires |
+| You write                                | Textual calls it when                          |
+| ---------------------------------------- | ---------------------------------------------- |
+| `on_button_pressed(self, event)`         | a `Button.Pressed` message reaches this widget |
+| `on_mount(self)`                         | the widget is mounted                          |
+| `watch_time(self, value)`                | `self.time` is assigned a different value      |
+| `action_toggle_dark(self)`               | a bound key (`D`) runs the action              |
+| `update_time` (passed to `set_interval`) | the timer fires                                |
 
 Each widget has its own message queue, processed by its own task. Handlers on one widget run one at a time.
 
